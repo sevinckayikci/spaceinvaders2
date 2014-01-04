@@ -57,7 +57,10 @@ public class Game extends Canvas {
     private boolean fireLeftPressed = false;
 	/** True if game logic needs to be applied this loop, normally as a result of a game event */
 	private boolean logicRequiredThisLoop = false;
-	
+
+    private long rightAngle = 0;
+    private long leftAngle = 0;
+
 	/**
 	 * Construct our game and set it running.
 	 */
@@ -294,7 +297,17 @@ public class Game extends Canvas {
                     Entity entity = (Entity) entities.get(i);
 
                     if (entity instanceof ShotEntity)
-                        entity.move(delta, 300);   // 300 degerini -/+ degistirirsen sag sol aciyi yapiyor...
+                        if(rightAngle > 0 ){
+                            long angle = rightAngle * 100;
+                            System.out.println("right angle : " + angle);
+                            entity.move(delta, angle);   // 300 degerini -/+ degistirirsen sag sol aciyi yapiyor...
+                        }
+                        else if (leftAngle > 0 ){
+                            long angle = -(leftAngle * 100);
+
+                            System.out.println("left angle : " + angle);
+                            entity.move(delta, angle);
+                        }
                     else
                         entity.move(delta);
                 }
@@ -434,6 +447,16 @@ public class Game extends Canvas {
 
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 fireLeftPressed = true;
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_X) {
+                rightAngle +=1;
+                leftAngle -=1;
+            }
+
+            if (e.getKeyCode() == KeyEvent.VK_Z) {
+                rightAngle -=1;
+                leftAngle +=1;
             }
         }
 
