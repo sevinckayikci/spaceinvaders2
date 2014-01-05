@@ -298,12 +298,12 @@ public class Game extends Canvas {
 
                     if (entity instanceof ShotEntity)
                         if(rightAngle > 0 ){
-                            long angle = rightAngle * 100;
+                            long angle = rightAngle * 141;  // 80 derecelik acı yapması için 141 olması gerektiğini buldum
                             System.out.println("right angle : " + angle);
                             entity.move(delta, angle);   // 300 degerini -/+ degistirirsen sag sol aciyi yapiyor...
                         }
                         else if (leftAngle > 0 ){
-                            long angle = -(leftAngle * 100);
+                            long angle = -(leftAngle * 141);
 
                             System.out.println("left angle : " + angle);
                             entity.move(delta, angle);
